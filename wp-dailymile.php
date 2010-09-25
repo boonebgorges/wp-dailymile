@@ -15,11 +15,18 @@ class WP_Dailymile_Loader {
 
 	// PHP4 loader
 	function anthologize_loader () {
+		session_start();
 		$this->__construct();
 	}
 	
 	function __construct() {
-		
+	
+		if ( is_admin() ) {
+			require_once( dirname(__FILE__) . '/lib/admin.php' );
+			$admin = new WP_DM_Admin;
+		}
+			
+	
 	}
 }
 
@@ -49,3 +56,5 @@ Supported Request Signing Functions
 HMAC-SHA1
 
 */
+
+?>
