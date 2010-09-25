@@ -63,7 +63,8 @@ class DMOAuth {
    * @returns a key/value array containing oauth_token and oauth_token_secret
    */
   function getRequestToken() {
-    $r = $this->oAuthRequest($this->requestTokenURL(), false, 'POST');
+  	$args = array( 'oauth_callback' => admin_url() . 'options-general.php?page=wp-dailymile' );
+    $r = $this->oAuthRequest($this->requestTokenURL(), $args, 'POST');
     $token = $this->oAuthParseResponse($r);
     $this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
     return $token;

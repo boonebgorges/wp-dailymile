@@ -9,6 +9,9 @@ class WP_DM_Admin {
 	}
 	
 	function __construct() {
+		if ( isset( $_POST['wpdm_auth_submit'] ) )
+			$this->oauth_init();
+			
 		add_action( 'admin_menu', array( $this, 'dashboard_hooks' ) );
 	}
 	
@@ -17,8 +20,6 @@ class WP_DM_Admin {
 	}
 	
 	function display() {
-		if ( isset( $_POST['wpdm_auth_submit'] ) )
-			$this->oauth_init();
 	
 		require_once( dirname(__FILE__) . '/admin-markup.php' );
 	}
@@ -41,7 +42,8 @@ class WP_DM_Admin {
 	/*	} else {
 			$url = $twitter->getAuthenticateURL( $token );
 		}*/
-		echo $url;
+		//echo $url;
+		require( ABSPATH . WPINC . '/pluggable.php' );
 		wp_redirect( $url );
 		
 		//print_r($request);

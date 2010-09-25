@@ -32,8 +32,10 @@ class WP_Dailymile_Loader {
 
 endif;
 
-$wp_dailymile = new WP_Dailymile_Loader();
-
+function wp_dailymile_loader() {
+	$wp_dailymile = new WP_Dailymile_Loader();
+}
+add_action( 'init', 'wp_dailymile_loader' );
 
 /*
 App Details (edit)
